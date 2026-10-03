@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doctor Tracker - For My Friend</title>
+<style>
+body{font-family:system-ui;max-width:500px;margin:0 auto;padding:20px;background:#f6f7fb}
+.card{background:white;padding:18px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);margin-bottom:16px}
+input,textarea{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:10px;box-sizing:border-box}
+button{width:100%;padding:13px;background:#111;color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer}
+button:hover{opacity:0.9}
+.appointment{border-left:4px solid #111;padding-left:12px;margin:12px 0}
+.small{color:#666;font-size:13px}
+.delete{color:red;background:none;width:auto;padding:0;font-size:13px;margin-top:6px}
+</style>
+</head>
+<body>
+<h2>🩺 My Doctor Appointments</h2>
+<p class="small">Built for a friend — private & offline</p>
+
+<div class="card">
+<input id="doctor" placeholder="Doctor Name e.g. Dr. Ahmed">
+<input id="date" type="date">
+<input id="time" type="time">
+<textarea id="notes" placeholder="Notes / Reason / Hospital"></textarea>
+<button onclick="add()">+ Add Appointment</button>
+</div>
+
+<div id="list"></div>
+
+<script>
+let data = JSON.parse(localStorage.getItem('appts') || '[]');
+function render(){
+  const el = document.getElementById('list');
+  if(data.length==0){el.innerHTML='<p class="small">No appointments yet</p>';return}
+  el.innerHTML = data.map((a,i)=>`
+    <div class="card appointment">
+      <b>${a.doctor}</b><br>
+      <span class="small"> ${a.date}  ${a.time}</span><br>
+      <span>${a.notes}</span><br>
+      <button class="delete" onclick="del(${i})">Delete</button>
+    </div>
+  `).join('');
+}
+function add(){
+  const doctor = document.getElementById('doctor').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const notes = document.getElementById('notes').value;
+  if(!doctor || !date){alert('Please add doctor and date');return}
+  data.unshift({doctor,date,time,notes});
+  localStorage.setItem('appts', JSON.stringify(data));
+  document.getElementById('doctor').value='';document.getElementById('notes').value='';
+  render();
+}
+function del(i){data.splice(i,1);localStorage.setItem('appts', JSON.stringify(data));render();}
+render();
+</script>
+</body>
+</html>
