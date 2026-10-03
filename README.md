@@ -7,7 +7,7 @@ A simple, offline doctor appointment tracker built in a single HTML file. Perfec
 [Made With](https://img.shields.io/badge/made%20with-HTML%20%7C%20CSS%20%7C%20JS-orange)
 
  Live Demo
-Enable GitHub Pages from Settings to get your live link here.
+https://eshaal-wq.github.io/Appointment-tracker/
 
  Features
  Add appointments with doctor name, date, time & notes
@@ -34,7 +34,7 @@ This project is beginner-friendly and open for Hacktoberfest contributions!
 Feel free to fork, create issues and open PRs!
 
  Author
-Made by eshaal-wq for learning and Hacktoberfest 2025.
+Made by eshaal-wq for learning and Hacktoberfest 2026.
 
  License
 Free to use - MIT License
